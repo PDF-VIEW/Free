@@ -2,35 +2,44 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Actualización disponible - Adobe Acrobat</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
+      margin: 0;
+      padding: 10px;
       background: #fff;
       color: #000;
     }
-    .logo {
-      width: 140px;
-    }
     .container {
-      max-width: 400px;
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
       margin: auto;
       border: 1px solid #ddd;
-      padding: 20px;
+      padding: 15px;
       border-radius: 10px;
+    }
+    .logo {
+      width: 100%;
+      max-width: 140px;
+      display: block;
+      margin-bottom: 10px;
     }
     .app-icon {
       width: 50px;
       vertical-align: middle;
     }
     .button {
-      padding: 10px 20px;
+      padding: 10px 15px;
       margin: 10px 5px 0 0;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 16px;
+      display: inline-block;
     }
     .btn-info {
       background-color: #fff;
@@ -55,6 +64,19 @@
       background: #1a73e8;
       border-radius: 4px;
     }
+
+    .arrow {
+      display: none;
+      font-size: 36px;
+      text-align: center;
+      animation: bounce 1s infinite;
+      margin-top: 20px;
+      color: #1a73e8;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
   </style>
 </head>
 <body>
@@ -71,14 +93,16 @@
     </p>
 
     <h3>Novedades</h3>
-    <p><small>Última actualización: 23 de junio de 2025</small></p>
+    <p><small id="fecha-actualizacion">Última actualización: </small></p>
     <ul>
       <li>Corrección de errores y mejoras de rendimiento.</li>
       <li>Corrección crítica de vulnerabilidad de seguridad.</li>
     </ul>
 
     <button class="button btn-info">Más información</button>
-    <button class="button btn-update">Actualizar</button>
+    <button class="button btn-update" onclick="iniciarDescarga()">Actualizar</button>
+
+    <div id="seta" class="arrow">⬇️</div>
 
     <h3>Valoraciones y reseñas</h3>
     <p>Las valoraciones y reseñas son verificadas y hechas por personas que usan el mismo tipo de dispositivo que tú.</p>
@@ -89,13 +113,3 @@
       <div class="rating-bar"><div class="rating-bar-fill" style="width: 80%;"></div></div>
       <div>4 estrellas</div>
       <div class="rating-bar"><div class="rating-bar-fill" style="width: 15%;"></div></div>
-      <div>3 estrellas</div>
-      <div class="rating-bar"><div class="rating-bar-fill" style="width: 3%;"></div></div>
-      <div>2 estrellas</div>
-      <div class="rating-bar"><div class="rating-bar-fill" style="width: 1%;"></div></div>
-      <div>1 estrella</div>
-      <div class="rating-bar"><div class="rating-bar-fill" style="width: 1%;"></div></div>
-    </div>
-  </div>
-</body>
-</html>
