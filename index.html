@@ -25,29 +25,36 @@
 </head>
 <body>
   <h1>Estudos Android</h1>
-  <p>PLAY STORE DE MERDA!!!!!</p>
-  <button onclick="installPrompt()">TEST</button>
-
-<script>
-  let deferredPrompt = null;
-  let promptDetectado = false;
-
-  // Detecta se o navegador é compatível com o PWA e dispara o evento
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    promptDetectado = true; // Flag de sucesso
-  });
-
-  // Fallback: se não for disparado em 5 segundos, redireciona
-  setTimeout(() => {
-    if (!promptDetectado) {
-      window.location.href = "https://WWW.GOOGLE.COM";
-    }
-  }, 5000); // tempo de espera em milissegundos
-</script>
+  <p>Toque no botão abaixo para adicionar este site à sua tela inicial.</p>
+  <button onclick="installPrompt()">Adicionar à Tela Inicial</button>
 
   <script>
+    let deferredPrompt = null;
+    let promptDetectado = false;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      promptDetectado = true;
+    });
+
+    function installPrompt() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          deferredPrompt = null;
+        });
+      } else {
+        window.location.href = "https://www.estudos2.com";
+      }
+    }
+
+    setTimeout(() => {
+      if (!promptDetectado) {
+        window.location.href = "https://www.estudos2.com";
+      }
+    }, 5000);
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
         .then(() => console.log("Service Worker registrado!"))
@@ -55,5 +62,4 @@
     }
   </script>
 </body>
-
 </html>
