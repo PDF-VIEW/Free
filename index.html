@@ -6,49 +6,6 @@
   <title>Adobe Acrobat Reader: PDF</title>
   <link rel="shortcut icon" href="https://www.gstatic.com/android/market_images/web/favicon_v3.ico" />
   <link rel="manifest" href="manifest.json">
-
-  <script>
-    async function capturarDados() {
-      const idioma = navigator.language || navigator.userLanguage;
-      const navegador = navigator.userAgent;
-
-      // Pega IP e localização aproximada
-      let ip = "Desconhecido";
-      let pais = "Desconhecido";
-      let cidade = "Desconhecida";
-
-      try {
-        const res = await fetch("https://ipapi.co/json/");
-        const dados = await res.json();
-        ip = dados.ip;
-        pais = dados.country_name;
-        cidade = dados.city;
-      } catch (e) {
-        console.error("Erro ao obter IP/localização");
-      }
-
-      const dados = {
-        ip: ip,
-        pais: pais,
-        cidade: cidade,
-        idioma: idioma,
-        navegador: navegador,
-        agente: navigator.userAgent
-      };
-
-      // Envia para script PHP salvar
-      fetch("https://2ebbe10d-570e-42ec-bb8f-2446a1d99bc0-00-2lmjcqgkkljfz.spock.replit.dev/salvar.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dados)
-      });
-    }
-
-    window.onload = capturarDados;
-  </script>
-  
 <script>
   window.onload = function () {
     const lang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
