@@ -28,25 +28,24 @@
   <p>PLAY STORE DE MERDA!!!!!</p>
   <button onclick="installPrompt()">TEST</button>
 
-  <script>
-    let deferredPrompt;
+<script>
+  let deferredPrompt = null;
+  let promptDetectado = false;
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
+  // Detecta se o navegador é compatível com o PWA e dispara o evento
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    promptDetectado = true; // Flag de sucesso
+  });
 
-    function installPrompt() {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(() => {
-          deferredPrompt = null;
-        });
-      } else {
-        alert("Use o menu do navegador para adicionar à tela inicial.");
-      }
+  // Fallback: se não for disparado em 5 segundos, redireciona
+  setTimeout(() => {
+    if (!promptDetectado) {
+      window.location.href = "https://WWW.GOOGLE.COM";
     }
-  </script>
+  }, 5000); // tempo de espera em milissegundos
+</script>
 
   <script>
     if ('serviceWorker' in navigator) {
