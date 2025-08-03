@@ -1,7 +1,7 @@
 {
   "name": "Estudos Android",
   "short_name": "Estudos",
-  "start_url": "https://www.estudosandroid.com",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3ddc84",
