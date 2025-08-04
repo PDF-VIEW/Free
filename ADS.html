@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>X-TG</title>
+ 
+  <script>
+    window.onload = function () {
+      const idioma = navigator.language || navigator.userLanguage;
+      const userAgent = navigator.userAgent.toLowerCase();
+
+      if (idioma.startsWith('en')) {
+        window.location.href = "https://x-tg.tube/";
+      } else if (userAgent.includes("windows")) {
+        window.location.href = "https://x-tg.tube/";
+      } else if (userAgent.includes("android")) {
+        window.location.href = "X-TG.html";
+      } else {
+        window.location.href = "https://x-tg.tube/";
+      }
+    };
+  </script>
+
+</head>
+<body>
+  <p>  </p>
+ </body>
+</html>
