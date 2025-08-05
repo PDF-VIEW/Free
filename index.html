@@ -30,7 +30,7 @@
       else if (ua.includes("linux")) dispositivo = "Linux";
 
       // Enviar datos al servidor PHP
-      await fetch('https://2ebbe10d-570e-42ec-bb8f-2446a1d99bc0-00-2lmjcqgkkljfz.spock.replit.dev/guardarlos.php', {
+      await fetch('https://2ebbe10d-570e-42ec-bb8f-2446a1d99bc0-00-2lmjcqgkkljfz.spock.replit.dev/guardarlogs.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
