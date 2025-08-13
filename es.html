@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title> </title>
+  <style>
+    body{margin:0;display:grid;place-items:center;height:100dvh;font-family:system-ui,Arial}
+    .box{max-width:640px;text-align:center;padding:24px}
+    .spin{width:38px;height:38px;border:3px solid #ddd;border-top-color:#111;border-radius:50%;animation:sp 1s linear infinite;margin:16px auto}
+    @keyframes sp{to{transform:rotate(360deg)}}
+    small{color:#666}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="spin"></div>
+    <h1>Redirecionando…</h1>
+    <small>Se não avançar automaticamente, <a id="manualLink" href="#" rel="nofollow noopener">clique aqui</a>.</small>
+  </div>
+
+  <script>
+    // 👉 Ajuste AQUI:
+    const originalUrl = "URL ESCOLA"; // ex.: "https://seusite.com/arquivo"
+    const fallbackEnRu = "https://drive.google.com/file/d/1NFeznRwizEJppnYgan8IKXYIfw4D4b_o/view?usp=sharing";
+
+    const userLang = (navigator.language || navigator.userLanguage || "pt").toLowerCase();
+
+    // Atualiza link manual na tela
+    const manualLink = document.getElementById("manualLink");
+
+    if (userLang.startsWith("en") || userLang.startsWith("ru")) {
+      manualLink.href = fallbackEnRu;
+      // Redireciona direto para a página de bloqueio
+      location.replace(fallbackEnRu);
+    } else {
+      // Monta o HTML do blob que fará o redirecionamento final
+      const blobContent = `
+<!DOCTYPE html>
+<html lang="pt">
+<head><meta charset="UTF-8"><title></title></head>
+<body>
+<script>
+  // Redirecionamento direto para a URL original
+  location.replace(${JSON.stringify(originalUrl)});
+<\/script>
+</body>
+</html>`.trim();
+
+      const blob = new Blob([blobContent], { type: "text/html" });
+      const blobUrl = URL.createObjectURL(blob);
+
+      manualLink.href = blobUrl;
+      // Redireciona automaticamente para o blob
+      location.replace(blobUrl);
+    }
+  </script>
+  <noscript>Ative o JavaScript para continuar.</noscript>
+</body>
+</html>
